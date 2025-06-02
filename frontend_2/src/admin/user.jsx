@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const User = () => {
   const [dataUser, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State pencarian
+  const [searchTerm, setSearchTerm] = useState("");
   const token = localStorage.getItem("token");
 
   const tampilData = async () => {
@@ -36,13 +36,13 @@ const User = () => {
         })
           .then((response) => response.json())
           .then(() => {
-            tampilData(); // panggil ulang data, tidak perlu reload
+            tampilData();
           });
       }
     });
   };
 
-  // Filter berdasarkan nama
+
   const filteredUsers = dataUser.filter((user) =>
     user.nama.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -52,7 +52,6 @@ const User = () => {
       <div className="container mt-4">
         <div className="row justify-content-center">
           <div className="col-md-8">
-            {/* Tombol Tambah & Search */}
             <div className="d-flex justify-content-between mb-3">
               <a href="/admin/adduser" className="btn btn-primary">
                 Tambah User
@@ -65,8 +64,6 @@ const User = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-
-            {/* Tabel Data */}
             <table className="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -87,17 +84,18 @@ const User = () => {
                       <td>
                         <a
                           href={`/admin/edituser/${item.id}`}
-                          className="btn btn-warning btn-sm"
+                          title="Edit"
                         >
-                          Edit
+                          <i className="bi bi-pencil-square"></i>
                         </a>
+
                       </td>
                       <td>
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="btn btn-danger btn-sm"
+                          title="Hapus"
                         >
-                          Hapus
+                          <i class="bi bi-trash3"></i>
                         </button>
                       </td>
                     </tr>
